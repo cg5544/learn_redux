@@ -1,3 +1,9 @@
+// The store:
+// State tree
+// Getting the state
+// Listening for changes
+// Updating the state
+
 function createStore () {
   let state
   let listeners = []
@@ -6,6 +12,9 @@ function createStore () {
 
   const subscribe = (listener) => {
     listeners.push(listener)
+    return () => {
+      listeners.filter((l) => l !== listener)
+    }
   }
 
   return {
@@ -15,11 +24,3 @@ function createStore () {
 }
 
 const store = createStore()
-
-store.subscribe(() => {
-  console.log('The new state is: ', store.getState())
-})
-
-store.subscribe(() => {
-  console.log('The store changed', store.getState())
-})
