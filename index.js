@@ -1,17 +1,12 @@
+// Library code
+
 // The store:
 // State tree
 // Getting the state
 // Listening for changes
 // Updating the state
 
-function todos (state = [], action) {
-  if (action.type === 'ADD_TODO') {
-    return state.concat([action.todo])
-  }
-  return state
-}
-
-function createStore () {
+function createStore (reducer) {
   let state
   let listeners = []
 
@@ -25,7 +20,7 @@ function createStore () {
   }
 
   const dispatch = (action) => {
-    state = todos(state, action)
+    state = reducer(state, action)
     listeners.forEach((listener) => listener())
   }
 
@@ -36,4 +31,13 @@ function createStore () {
   }
 }
 
-const store = createStore()
+
+// App code
+function todos (state = [], action) {
+  if (action.type === 'ADD_TODO') {
+    return state.concat([action.todo])
+  }
+  return state
+}
+
+const store = createStore(todos)
