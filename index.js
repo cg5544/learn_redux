@@ -6,30 +6,30 @@
 // Listening for changes
 // Updating the state
 
-function createStore (reducer) {
-  let state
-  let listeners = []
-
-  const getState = () => state
-
-  const subscribe = (listener) => {
-    listeners.push(listener)
-    return () => {
-      listeners.filter((l) => l !== listener)
-    }
-  }
-
-  const dispatch = (action) => {
-    state = reducer(state, action)
-    listeners.forEach((listener) => listener())
-  }
-
-  return {
-    getState,
-    subscribe,
-    dispatch
-  }
-}
+// function createStore (reducer) {
+//   let state
+//   let listeners = []
+//
+//   const getState = () => state
+//
+//   const subscribe = (listener) => {
+//     listeners.push(listener)
+//     return () => {
+//       listeners.filter((l) => l !== listener)
+//     }
+//   }
+//
+//   const dispatch = (action) => {
+//     state = reducer(state, action)
+//     listeners.forEach((listener) => listener())
+//   }
+//
+//   return {
+//     getState,
+//     subscribe,
+//     dispatch
+//   }
+// }
 
 
 // App code
@@ -100,26 +100,29 @@ function goals (state = [], action) {
   }
 }
 
-function app (state = {}, action) {
-  return {
-    todos: todos(state.todos, action),
-    goals: goals(state.goals, action)
-  }
-}
+// function app (state = {}, action) {
+//   return {
+//     todos: todos(state.todos, action),
+//     goals: goals(state.goals, action)
+//   }
+// }
 
 
 // example
-const store = createStore(app)
-
-store.subscribe(() => {
-  const { goals, todos } = store.getState()
-
-  document.getElementById('goals').innerHTML = ''
-  document.getElementById('todos').innerHTML = ''
-
-  goals.forEach(addGoalToDom)
-  todos.forEach(addTodoToDom)
-})
+// const store = Redux.createStore(Redux.combineReducers({
+//   todos,
+//   goals
+// }))
+//
+// store.subscribe(() => {
+//   const { goals, todos } = store.getState()
+//
+//   document.getElementById('goals').innerHTML = ''
+//   document.getElementById('todos').innerHTML = ''
+//
+//   goals.forEach(addGoalToDom)
+//   todos.forEach(addTodoToDom)
+// })
 
 // store.dispatch(addTodoAction({
 //   id: 0,
