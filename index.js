@@ -40,14 +40,14 @@ const ADD_GOAL = 'ADD_GOAL'
 const REMOVE_GOAL = 'REMOVE_GOAL'
 
 // Action creators
-function AddTodoAction (todo) {
+function addTodoAction (todo) {
   return {
     type: ADD_TODO,
     todo
   }
 }
 
-function RemoveTodoAction (id) {
+function removeTodoAction (id) {
   return {
     type: REMOVE_TODO,
     id
@@ -133,7 +133,7 @@ store.dispatch(addTodoAction({
   complete: true
 }))
 
-store.dispatch(RemoveTodoAction(1))
+store.dispatch(removeTodoAction(1))
 
 store.dispatch(toggleTodoAction(0))
 
