@@ -33,7 +33,7 @@
         return Math.random().toString(36).substring(2) + (new Date().getTime().toString(36))
       }
 
-      // middleware 
+      // middleware
       const checker = (store) => (next) => (action) => {
         if (
           action.type === ADD_TODO &&
@@ -52,11 +52,21 @@
         return next(action)
       }
 
+      // middleware to log info to console
+      const logger = (store) => (next) => (action) => {
+        console.group(action.type)
+          console.log('The action: ', action)
+          const result = next(action)
+          console.log('The new state: ', store.getState())
+        console.groupEnd()
+        return result
+      }
+
       // App code
       const store = Redux.createStore(Redux.combineReducers({
         todos,
         goals
-      }), Redux.applyMiddleware(checker))
+      }), Redux.applyMiddleware(checker, logger))
 
       store.subscribe(() => {
         const { goals, todos } = store.getState()
