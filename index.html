@@ -237,7 +237,10 @@
                 />
                 <button onClick={this.addItem}>Add Goal</button>
 
-                <List items={this.props.goals}/>
+                <List
+                  items={this.props.goals}
+                  remove={this.removeItem}
+                />
               </div>
             )
           }
@@ -257,7 +260,7 @@
             return (
               <div>
                 <Todos todos={todos} store={this.props.store}/>
-                <Goals golas={goals} store={this.props.store}/>
+                <Goals goals={goals} store={this.props.store}/>
               </div>
             )
           }
